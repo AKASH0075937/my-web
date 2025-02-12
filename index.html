@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Valentine's Day Page</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff8a8a, #ff4d4d);
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: white;
+            margin-top: 100px;
+            font-size: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInText 2s ease-out forwards;
+        }
+
+        h2,
+        h3 {
+            color: white;
+        }
+
+        .buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInButtons 2s ease-out 1s forwards;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .yes {
+            background-color: #ff4d4d;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 77, 77, 0.5);
+        }
+
+        .yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.7);
+        }
+
+        .no {
+            background-color: white;
+            color: #ff4d4d;
+            border: 2px solid #ff4d4d;
+            box-shadow: 0 4px 10px rgba(255, 77, 77, 0.5);
+        }
+
+        .no:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.7);
+        }
+
+        .envelope {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 200px;
+            background-color: #ffcccc;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            padding: 20px;
+            display: none;
+            opacity: 0;
+            animation: envelopeAnimation 1s ease-out forwards;
+        }
+
+        .envelope h2 {
+            margin: 0;
+            color: #ff4d4d;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            color: red;
+            animation: heartAnimation 4s ease-in-out infinite;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-50vh) scale(1.3) rotate(90deg);
+            }
+
+            50% {
+                transform: translateY(0) scale(1) rotate(180deg);
+            }
+
+            75% {
+                transform: translateY(-50vh) scale(1.3) rotate(270deg);
+            }
+
+            100% {
+                transform: translateY(100vh) scale(0.5) rotate(360deg);
+            }
+        }
+
+        @keyframes envelopeAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInButtons {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .noMessage,
+        .loveMessage {
+            display: none;
+            margin-top: 50px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: rgba(255, 77, 77, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeInMessage 2s ease-out forwards;
+        }
+
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Will you be my Valentine? ❤️</h1>
+
+    <div class="buttons">
+        <button class="yes" onclick="moveToEnvelope()">Yes</button>
+        <button class="no" id="noButton" onclick="decline()">No</button>
+    </div>
+
+    <div id="hearts"></div>
+
+    <div class="envelope" id="envelopeCard" onclick="revealCard()">
+        <h2>Click to pick the card 💌</h2>
+    </div>
+
+    <div id="cardMessage" style="display: none; padding: 20px;">
+        <h2>❤️ Love is not about how many days, months, or years you've been together. It's about how much you love ❤️ each other every day. ❤️</h2>
+    </div>
+
+    <div id="secondCardMessage" style="display: none; padding: 20px;">
+        <h3>❤️ I LOVE YOU MY GIRL 🌹💐</h3>
+    </div>
+
+    <div class="noMessage" id="noMessage">
+        <h2>No option for you, be with me 😤</h2>
+    </div>
+
+    <div class="loveMessage" id="loveMessage">
+        <h2>I still love you, no matter what! ❤️</h2>
+    </div>
+
+    <script>
+        function moveToEnvelope() {
+            document.querySelector('.yes').style.display = 'none';
+            document.querySelector('.no').style.display = 'none';
+
+            const envelope = document.getElementById('envelopeCard');
+            envelope.style.display = 'block';
+            envelope.style.animation = 'envelopeAnimation 1s ease-out forwards';
+            setTimeout(function () {
+                envelope.style.opacity = 1;
+            }, 100);
+
+            window.scrollTo({ top: envelope.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function revealCard() {
+            document.getElementById('cardMessage').style.display = 'block';
+            document.getElementById('envelopeCard').style.display = 'none';
+            document.getElementById('secondCardMessage').style.display = 'block';
+        }
+
+        function decline() {
+            document.querySelector('.buttons').style.display = 'none';
+            document.getElementById('noMessage').style.display = 'block';
+            document.getElementById('loveMessage').style.display = 'block';
+        }
+
+        function createHearts() {
+            const heartContainer = document.getElementById("hearts");
+            for (let i = 0; i < 5; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = `${Math.random() * window.innerWidth}px`;
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                heart.style.fontSize = `${Math.random() * 30 + 30}px`;
+                heartContainer.appendChild(heart);
+            }
+        }
+
+        setInterval(createHearts, 1500);
+    </script>
+
+</body>
+
+</html>
